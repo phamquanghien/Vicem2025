@@ -1,0 +1,72 @@
+' Bộ phận quản lý đào tạo
+@startuml
+left to right direction
+actor "Bộ phận QL Đào tạo" as TrainingDept
+
+rectangle "Hệ thống Quản lý đào tạo" {
+    (Quản lý khoá học) as UC_CoursesManagement
+    (Xem danh sách các khoá học) as UC_CourseList
+    (CRUD khoá học) as UC_CourseCRUD
+    (Quản lý học viên) as UC_StudentManagement
+    (Quản lý kết quả học tập) as UC_StudyResultManagement
+
+    (Xem danh sách học viên) as UC_StudentList
+    (Điểm danh) as UC_Attendance
+
+    (Nhập kết quả học tập) as UC_StudyResultEntry
+    (Xem kết quả học tập) as UC_ViewStudyResults
+    (Xuất báo cáo kết quả) as UC_ExportResult
+}
+
+TrainingDept --> UC_CoursesManagement
+
+UC_CoursesManagement --> UC_CourseList : <<include>>
+UC_CoursesManagement --> UC_CourseCRUD
+UC_CoursesManagement --> UC_StudentManagement
+UC_CoursesManagement --> UC_StudyResultManagement
+
+UC_StudentManagement --> UC_StudentList : <<include>>
+UC_StudentManagement --> UC_Attendance
+
+UC_StudyResultManagement --> UC_StudyResultEntry
+UC_StudyResultManagement --> UC_ViewStudyResults
+UC_StudyResultManagement --> UC_ExportResult
+@enduml
+
+'Đơn vị thành viên
+@startuml
+left to right direction
+actor "Đơn vị thành viên" as Subsidiary
+
+rectangle "Hệ thống Quản lý đào tạo" {
+    (Xem danh sách khoá học) as UC_CourseList
+
+    (Đăng ký học viên) as UC_StudentRegistration
+    (Xem kết quả học viên) as UC_StudentProgressTracking
+    (Xem thông tin điểm danh) as UC_ViewAttendance
+    (Xem thông tin chi tiết khoá học) as UC_CourseDetail
+}
+Subsidiary --> UC_CourseList
+UC_CourseList --> UC_StudentRegistration
+UC_CourseList --> UC_StudentProgressTracking
+UC_CourseList --> UC_CourseDetail
+@enduml
+'Học viên
+@startuml
+left to right direction
+actor "Cán bộ học viên" as Trainee
+
+rectangle "Hệ thống Quản lý đào tạo" {
+  (Xem danh sách khoá học) as UC_CourseList
+  (Xem thông tin chi tiết khoá học) as UC_CourseDetail
+  (Xem kết quả học tập) as UC_ViewStudyResults
+  (Xem thông tin điểm danh) as UC_ViewAttendance
+  (Đăng ký nghỉ học) as UC_LeaveRegistration
+}
+
+Trainee --> UC_CourseList
+UC_CourseList --> UC_CourseDetail
+UC_CourseList --> UC_ViewStudyResults
+UC_CourseList --> UC_ViewAttendance
+UC_CourseList --> UC_LeaveRegistration
+@enduml

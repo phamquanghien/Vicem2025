@@ -1,0 +1,137 @@
+' Bộ phận quản lý đào tạo
+@startuml
+title Trình tự: Bộ phận QL Đào tạo quản lý khoá học, học viên và kết quả
+
+actor "Bộ phận QL Đào tạo" as TrainingDept
+participant "Hệ thống QL Đào tạo" as System
+database "CSDL" as DB
+
+== Quản lý khoá học ==
+TrainingDept -> System: Chọn "Quản lý khoá học"
+System -> DB: Lấy danh sách khoá học
+DB --> System: Trả về danh sách
+System --> TrainingDept: Hiển thị danh sách khoá học
+
+alt CRUD khoá học
+  TrainingDept -> System: Tạo/Sửa/Xoá khoá học
+  System -> DB: Cập nhật thông tin khoá học
+  DB --> System: Xác nhận
+  System --> TrainingDept: Cập nhật thành công
+end
+
+== Quản lý học viên ==
+TrainingDept -> System: Chọn "Quản lý học viên" (theo khoá học)
+System -> DB: Lấy danh sách học viên của khoá
+DB --> System: Trả về danh sách học viên
+System --> TrainingDept: Hiển thị danh sách học viên
+
+alt Điểm danh
+  TrainingDept -> System: Cập nhật trạng thái điểm danh
+  System -> DB: Lưu trạng thái điểm danh
+  DB --> System: OK
+  System --> TrainingDept: Điểm danh thành công
+end
+
+== Quản lý kết quả học tập ==
+TrainingDept -> System: Chọn "Quản lý kết quả học tập"
+System -> DB: Lấy kết quả học tập theo khoá
+DB --> System: Trả về danh sách kết quả
+System --> TrainingDept: Hiển thị danh sách kết quả
+
+alt Nhập kết quả học tập
+  TrainingDept -> System: Nhập điểm / nhận xét
+  System -> DB: Lưu kết quả học tập
+  DB --> System: OK
+  System --> TrainingDept: Lưu thành công
+end
+
+alt Xem kết quả học tập
+  TrainingDept -> System: Yêu cầu xem chi tiết kết quả
+  System -> DB: Lấy dữ liệu kết quả
+  DB --> System: Dữ liệu kết quả
+  System --> TrainingDept: Hiển thị chi tiết kết quả
+end
+
+alt Xuất báo cáo kết quả
+  TrainingDept -> System: Yêu cầu xuất báo cáo
+  System -> DB: Lấy dữ liệu kết quả
+  DB --> System: Dữ liệu báo cáo
+  System --> TrainingDept: Xuất file báo cáo (Excel/PDF)
+end
+@enduml
+'Đơn vị thành viên
+@startuml
+title Trình tự: Đơn vị thành viên sử dụng hệ thống quản lý đào tạo
+
+actor "Đơn vị thành viên" as Subsidiary
+participant "Hệ thống QL Đào tạo" as System
+database "CSDL" as DB
+
+== Xem danh sách khoá học ==
+Subsidiary -> System: Chọn "Xem danh sách khoá học"
+System -> DB: Truy vấn danh sách khoá học
+DB --> System: Trả về danh sách
+System --> Subsidiary: Hiển thị danh sách khoá học
+
+== Đăng ký học viên ==
+Subsidiary -> System: Chọn "Đăng ký học viên" (nhập thông tin / upload Excel)
+System -> DB: Lưu thông tin học viên đăng ký
+DB --> System: Xác nhận lưu thành công
+System --> Subsidiary: Thông báo đăng ký thành công
+
+== Xem kết quả học viên ==
+Subsidiary -> System: Chọn "Xem kết quả học viên"
+System -> DB: Truy vấn kết quả học tập
+DB --> System: Trả về kết quả học tập
+System --> Subsidiary: Hiển thị kết quả học viên
+
+== Xem thông tin điểm danh ==
+Subsidiary -> System: Chọn "Xem thông tin điểm danh"
+System -> DB: Truy vấn dữ liệu điểm danh
+DB --> System: Trả về dữ liệu điểm danh
+System --> Subsidiary: Hiển thị thông tin điểm danh
+
+== Xem chi tiết khoá học ==
+Subsidiary -> System: Chọn "Xem thông tin chi tiết khoá học"
+System -> DB: Lấy thông tin chi tiết khoá học
+DB --> System: Trả về dữ liệu chi tiết
+System --> Subsidiary: Hiển thị thông tin chi tiết
+@enduml
+'Học viên
+@startuml
+title Trình tự: Cán bộ học viên sử dụng hệ thống quản lý đào tạo
+
+actor "Cán bộ học viên" as Trainee
+participant "Hệ thống QL Đào tạo" as System
+database "CSDL" as DB
+
+== Xem danh sách khoá học ==
+Trainee -> System: Chọn "Xem danh sách khoá học"
+System -> DB: Truy vấn danh sách khoá học
+DB --> System: Trả về danh sách
+System --> Trainee: Hiển thị danh sách khoá học
+
+== Xem thông tin chi tiết khoá học ==
+Trainee -> System: Chọn "Xem chi tiết khoá học"
+System -> DB: Lấy thông tin chi tiết khoá học
+DB --> System: Trả về thông tin chi tiết
+System --> Trainee: Hiển thị chi tiết khoá học
+
+== Xem kết quả học tập ==
+Trainee -> System: Chọn "Xem kết quả học tập"
+System -> DB: Truy vấn kết quả học tập
+DB --> System: Trả về kết quả
+System --> Trainee: Hiển thị kết quả học tập
+
+== Xem thông tin điểm danh ==
+Trainee -> System: Chọn "Xem thông tin điểm danh"
+System -> DB: Truy vấn dữ liệu điểm danh
+DB --> System: Trả về dữ liệu điểm danh
+System --> Trainee: Hiển thị thông tin điểm danh
+
+== Đăng ký nghỉ học ==
+Trainee -> System: Chọn "Đăng ký nghỉ học" (nhập lý do, thời gian)
+System -> DB: Lưu thông tin đăng ký nghỉ
+DB --> System: Xác nhận lưu thành công
+System --> Trainee: Thông báo đăng ký nghỉ học thành công
+@enduml

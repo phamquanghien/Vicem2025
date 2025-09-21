@@ -1,0 +1,79 @@
+'1. Course – (Khoá học)
+'2. Trainee – (Học viên / Cán bộ học viên)
+'3. Subsidiary – (Đơn vị thành viên)
+'4. TrainingDept – (Bộ phận quản lý đào tạo)
+'5. StudyResult – (Kết quả học tập)
+'6. Attendance – (Điểm danh)
+'7. LeaveRegistration – (Đăng ký nghỉ học)
+@startuml
+class Course {
+    - CourseId : int
+    - Name : string
+    - Description : string
+    - StartDate : DateTime
+    - EndDate : DateTime
+}
+
+class Session {
+    - SessionId : int
+    - CourseId : int
+    - Date : DateTime
+    - Duration : int
+    - Topic : string
+    - Lecturer : string
+}
+
+class Student {
+    - StudentId : int
+    - FullName : string
+    - DateOfBirth : Date
+    - Gender : string
+    - Email : string
+    - Phone : string
+    - Unit : string
+}
+
+class Enrollment {
+    - EnrollmentId : int
+    - StudentId : int
+    - CourseId : int
+    - EnrollmentDate : DateTime
+    - Status : string
+}
+
+class Attendance {
+    - AttendanceId : int
+    - StudentId : int
+    - SessionId : int
+    - Status : string
+    - Note : string
+}
+
+class StudyResult {
+    - StudyResultId : int
+    - StudentId: int
+    - CourseId: int
+    - Score: double
+    - Grade: string
+    - Remarks: string
+}
+
+class LeaveRequest {
+    - LeaveRequestId : int
+    - StudentId : int
+    - SessionId : int
+    - Reason : string
+    - RequestDate : DateTime
+    - Status : string
+}
+
+Course "1" -- "0..*" Session
+Student "1" -- "0..*" Enrollment
+Course "1" -- "0..*" Enrollment
+Student "1" -- "0..*" Attendance
+Session "1" -- "0..*" Attendance
+Student "1" -- "0..*" StudyResult
+Course "1" -- "0..*" StudyResult
+Student "1" -- "0..*" LeaveRequest
+Session "1" -- "0..*" LeaveRequest
+@enduml

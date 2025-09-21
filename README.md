@@ -7,4 +7,8 @@
    - C# cơ bản, C# nâng cao
    - HTML, CSS
    - C# MVC, EntityFramework, LinQ
-3. 
+3. Triển khai project với docker
+   - Tạo docker file
+   - Tạo image: docker build -t demo-mvc-image:v1.0 .
+   - Tạo container:  docker run -d -p 8080:80 --name mvc_container -e ASPNETCORE_URLS="http://+:80" demo-mvc-image:v1.0
+4. 

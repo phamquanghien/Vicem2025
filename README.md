@@ -15,4 +15,7 @@
    - Tạo docker file
    - Tạo image: docker build -t demo-mvc-image:v1.0 .
    - Tạo container:  docker run -d -p 8080:80 --name mvc_container -e ASPNETCORE_URLS="http://+:80" demo-mvc-image:v1.0
-5. 
+5. Triển khai SQL Server với docker:
+   - Tải về image: 'docker pull mcr.microsoft.com/mssql/server:2019-latest' hoặc 'docker pull mcr.microsoft.com/mssql/server:2022-latest'
+   - Tạo container: 'docker run -d --name sql_server_container -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=YourStrong!Passw0rd" -p 1433:1433 mcr.microsoft.com/mssql/server:2019-latest' hoặc 'docker run -d --name sql_server_container -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=YourStrong!Passw0rd" -p 1433:1433 mcr.microsoft.com/mssql/server:2022-latest'
+6. 

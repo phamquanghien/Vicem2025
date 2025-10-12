@@ -14,5 +14,23 @@ namespace DemoMVC.Controllers
         {
             return View(_people);
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                person.Id = _people.Max(p => p.Id) + 1;
+                _people.Add(person);
+                return RedirectToAction("Index");
+            }
+
+            return View(person);
+        }
     }
 }

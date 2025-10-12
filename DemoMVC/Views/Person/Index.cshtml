@@ -15,6 +15,7 @@
             <th>Email</th>
             <th>SĐT</th>
             <th>Địa chỉ</th>
+            <th>#</th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,9 @@
                 <td>@p.Email</td>
                 <td>@p.PhoneNumber</td>
                 <td>@p.Address</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-warning btn-sm">Sửa</a>
+                </td>
             </tr>
         }
     </tbody>

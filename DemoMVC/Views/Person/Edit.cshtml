@@ -1,0 +1,48 @@
+@model DemoMVC.Models.Person
+
+<h2>Chỉnh sửa thông tin Person</h2>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label>Họ tên</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Giới tính</label>
+        <select asp-for="Gender" class="form-control">
+            <option>Nam</option>
+            <option>Nữ</option>
+            <option>Khác</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Năm sinh</label>
+        <input asp-for="YearOfBirth" type="number" class="form-control" min="1900" max="@DateTime.Now.Year" />
+        <span asp-validation-for="YearOfBirth" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Địa chỉ</label>
+        <input asp-for="Address" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Số điện thoại</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Lưu</button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

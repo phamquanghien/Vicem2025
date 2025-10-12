@@ -32,5 +32,36 @@ namespace DemoMVC.Controllers
 
             return View(person);
         }
+        public IActionResult Edit(int id)
+        {
+            var person = _people.FirstOrDefault(p => p.Id == id);
+            if (person == null)
+                return NotFound();
+
+            return View(person);
+        }
+        [HttpPost]
+        public IActionResult Edit(Person updatedPerson)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Trả về view kèm lỗi validate
+                return View(updatedPerson);
+            }
+
+            var existing = _people.FirstOrDefault(p => p.Id == updatedPerson.Id);
+            if (existing == null)
+                return NotFound();
+
+            // Cập nhật giá trị
+            existing.FullName = updatedPerson.FullName;
+            existing.Gender = updatedPerson.Gender;
+            existing.YearOfBirth = updatedPerson.YearOfBirth;
+            existing.Email = updatedPerson.Email;
+            existing.PhoneNumber = updatedPerson.PhoneNumber;
+            existing.Address = updatedPerson.Address;
+
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -31,6 +31,7 @@
                 <td>@p.Address</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger btn-sm">Xóa</a>
                 </td>
             </tr>
         }

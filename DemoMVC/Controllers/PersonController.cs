@@ -63,5 +63,23 @@ namespace DemoMVC.Controllers
 
             return RedirectToAction("Index");
         }
+        public IActionResult Delete(int id)
+        {
+            var person = _people.FirstOrDefault(p => p.Id == id);
+            if (person == null)
+                return NotFound();
+
+            return View(person);
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var person = _people.FirstOrDefault(p => p.Id == id);
+            if (person == null)
+                return NotFound();
+
+            _people.Remove(person);
+            return RedirectToAction("Index");
+        }
     }
 }

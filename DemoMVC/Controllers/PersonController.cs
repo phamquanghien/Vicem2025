@@ -12,6 +12,9 @@ namespace DemoMVC.Controllers
         };
         public IActionResult Index()
         {
+            ViewBag.Title = "Danh sách Person";
+            ViewData["CountPerson"] = _people.Count;
+            ViewBag.CreateMessage = TempData["SuccessMessage"];
             return View(_people);
         }
         [HttpGet]
@@ -27,6 +30,7 @@ namespace DemoMVC.Controllers
             {
                 person.Id = _people.Max(p => p.Id) + 1;
                 _people.Add(person);
+                TempData["SuccessMessage"] = "Thêm người mới thành công!";
                 return RedirectToAction("Index");
             }
 

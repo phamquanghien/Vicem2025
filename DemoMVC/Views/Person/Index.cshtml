@@ -2,9 +2,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model IEnumerable<DemoMVC.Models.Person>
-<h2>Danh sách Person</h2>
+<h2>@ViewBag.Title - @ViewData["CountPerson"] bản ghi</h2>
 <a href="/Person/Create" class="btn btn-primary mb-3">Thêm mới</a>
-
+<h3>@ViewBag.CreateMessage</h3>
 <table class="table table-bordered">
     <thead>
         <tr>

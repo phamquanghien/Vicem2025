@@ -4,6 +4,7 @@ namespace DemoMVC.Models
 {
     public class Person
     {
+        [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "Họ và tên là bắt buộc.")]
         // Họ và tên đầy đủ

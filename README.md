@@ -21,4 +21,4 @@
 6. Điều hướng trong .Net MVC
    - Cấu hình trong file Program.cs
    - Sử dụng [Route("")] để điều hướng trong controller
-7. 
+7. Cấu hình kết nối với cơ sở dữ liệu: Program.cs, appsettings.json, ApplicationDbContext

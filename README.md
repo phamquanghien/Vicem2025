@@ -25,4 +25,4 @@
 8. Sử dụng migrations để quản lý các phiên bản của cơ sở dữ liệu với 2 lệnh sau:
    - Lưu thay đổi cấu trúc CSDL vào migrations: dotnet ef migrations add MIGRATION_NOTE
    - Lưu thay đổi migrations và CSDL: dotnet ef database update
-9.  
+9. Sinh mã CRUD dựa trên class model: dotnet aspnet-codegenerator controller -name CourseController -m Course -dc DemoMVC.Data.ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries --databaseProvider sqlite

@@ -10,9 +10,19 @@ namespace DemoMVC.Controllers
         private readonly ApplicationDbContext _context = context;
 
         // GET: Course
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Courses.ToListAsync());
+            ViewData["CurrentFilter"] = searchString;
+            var courses = from m in _context.Courses
+                          select m;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                string normalizedSearch = searchString.ToLower();
+                courses = courses.Where(c =>
+                    c.CourseName.ToLower().Contains(normalizedSearch) ||
+                    c.CourseCode.ToLower().Contains(normalizedSearch));
+            }
+            return View(await courses.AsNoTracking().ToListAsync());
         }
 
         // GET: Course/Create

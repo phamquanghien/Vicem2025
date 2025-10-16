@@ -22,3 +22,7 @@
    - Cấu hình trong file Program.cs
    - Sử dụng [Route("")] để điều hướng trong controller
 7. Cấu hình kết nối với cơ sở dữ liệu: Program.cs, appsettings.json, ApplicationDbContext
+8. Sử dụng migrations để quản lý các phiên bản của cơ sở dữ liệu với 2 lệnh sau:
+   - Lưu thay đổi cấu trúc CSDL vào migrations: dotnet ef migrations add MIGRATION_NOTE
+   - Lưu thay đổi migrations và CSDL: dotnet ef database update
+9.  

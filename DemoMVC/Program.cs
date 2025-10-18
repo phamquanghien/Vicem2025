@@ -28,6 +28,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-app.MapGet("/", () => Results.Redirect("/trang-chu"));
+app.MapGet("/", () => Results.Redirect("/khoa-hoc"));
 
 app.Run();

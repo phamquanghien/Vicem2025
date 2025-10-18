@@ -2,14 +2,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DemoMVC.Data;
 using DemoMVC.Models.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using DemoMVC.Models.Enums;
 
 namespace DemoMVC.Controllers
 {
+    [Route("khoa-hoc")]
     public class CourseController(ApplicationDbContext context) : Controller
     {
         private readonly ApplicationDbContext _context = context;
 
         // GET: Course
+        [Route("")]
         public async Task<IActionResult> Index(string searchString)
         {
             ViewData["CurrentFilter"] = searchString;
@@ -26,15 +30,18 @@ namespace DemoMVC.Controllers
         }
 
         // GET: Course/Create
+        [Route("tao-moi")]
         public IActionResult Create()
         {
+            ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(CourseStatus)));
             return View();
         }
 
         // POST: Course/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CourseCode,CourseName,Description")] Course course)
+        [Route("tao-moi")]
+        public async Task<IActionResult> Create([Bind("Id,CourseCode,CourseName,CreatedDate,Status")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -42,10 +49,12 @@ namespace DemoMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(CourseStatus)));
             return View(course);
         }
 
         // GET: Course/Edit/5
+        [Route("sua/{id?}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -58,13 +67,15 @@ namespace DemoMVC.Controllers
             {
                 return NotFound();
             }
+            ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(CourseStatus)));
             return View(course);
         }
 
         // POST: Course/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseCode,CourseName,Description")] Course course)
+        [Route("sua/{id?}")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseCode,CourseName,CreatedDate,Status")] Course course)
         {
             if (id != course.Id)
             {
@@ -91,10 +102,12 @@ namespace DemoMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(CourseStatus)));
             return View(course);
         }
 
         // GET: Course/Delete/5
+        [Route("xoa/{id?}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -115,6 +128,7 @@ namespace DemoMVC.Controllers
         // POST: Course/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("xoa/{id?}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var course = await _context.Courses.FindAsync(id);

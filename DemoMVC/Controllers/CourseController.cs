@@ -140,6 +140,12 @@ namespace DemoMVC.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        [Route("chi-tiet/{id?}")]
+        public async Task<IActionResult> Details(int id)
+        {
+            ViewData["CourseId"] = id;
+            return View();
+        }
 
         private bool CourseExists(int id)
         {

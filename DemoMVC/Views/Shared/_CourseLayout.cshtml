@@ -24,8 +24,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Course"
-                                asp-action="Index">Course</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Batch" asp-action="Index"
+                                asp-route-courseId="@ViewData["CourseId"]">Batch</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Index"
+                                asp-route-courseId="@ViewData["CourseId"]">Registration</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Evaluation" asp-action="Index"
+                                asp-route-courseId="@ViewData["CourseId"]">Evaluation</a>
                         </li>
                     </ul>
                 </div>
@@ -38,11 +46,6 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - DemoMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

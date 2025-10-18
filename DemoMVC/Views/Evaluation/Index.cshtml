@@ -1,0 +1,38 @@
+@model DemoMVC.Models.ViewModels.EvaluationVM
+
+<h2>Đánh giá kết quả khóa học: @Model.CourseName</h2>
+<form asp-action="Save" method="post">
+    <input type="hidden" asp-for="CourseId" />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mã HV</th>
+                <th>Họ tên</th>
+                <th>Điểm</th>
+                <th>Nhận xét</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Trainees.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model.Trainees[i].TraineeCode
+                        <input type="hidden" asp-for="Trainees[i].TraineeId" />
+                    </td>
+                    <td>@Model.Trainees[i].FullName</td>
+                    <td><input asp-for="Trainees[i].Score" class="form-control" /></td>
+                    <td><input asp-for="Trainees[i].Remark" class="form-control" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Lưu kết quả</button>
+</form>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["Success"]</div>
+}

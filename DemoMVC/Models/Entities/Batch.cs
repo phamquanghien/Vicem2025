@@ -25,7 +25,7 @@ namespace DemoMVC.Models.Entities
         public BatchStatus Status { get; set; } = BatchStatus.NotStarted;
         [ForeignKey(nameof(Course))]
         public int CourseId { get; set; }
-        public Course Course { get; set; } = default!;
+        public Course? Course { get; set; } = default!;
         public ICollection<Session>? Sessions { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DemoMVC.Models.Enums;
 
 namespace DemoMVC.Models.Entities
 {
@@ -7,33 +8,23 @@ namespace DemoMVC.Models.Entities
     {
         [Key]
         public int Id { get; set; }
-
-        [Required, StringLength(50)]
-        public string SessionCode { get; set; } = string.Empty;
-
-        [Required, StringLength(255)]
-        public string SessionName { get; set; } = string.Empty;
-
+        [Required]
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime SessionDate { get; set; }
 
-        [Required, StringLength(50)]
-        public string Period { get; set; } = "Morning";
-
+        [Required]
+        public SessionType SessionType { get; set; }
+        [Required]
         [DataType(DataType.Time)]
         public TimeSpan StartTime { get; set; }
-
+        [Required]
         [DataType(DataType.Time)]
         public TimeSpan EndTime { get; set; }
-
-        [MaxLength(500)]
-        public string? Description { get; set; }
-
         [ForeignKey(nameof(Batch))]
         public int BatchId { get; set; }
 
         // 🔗 Navigation properties
-        public Batch Batch { get; set; } = default!;
+        public Batch? Batch { get; set; } = default!;
 
         public ICollection<Attendance>? Attendances { get; set; }
     }

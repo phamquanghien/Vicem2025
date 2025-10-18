@@ -19,9 +19,6 @@ namespace DemoMVC.Models.Entities
 
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
-
-        [MaxLength(500)]
-        public string? Description { get; set; }
         public BatchStatus Status { get; set; } = BatchStatus.NotStarted;
         [ForeignKey(nameof(Course))]
         public int CourseId { get; set; }

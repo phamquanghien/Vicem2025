@@ -26,3 +26,10 @@
    - Lưu thay đổi cấu trúc CSDL vào migrations: dotnet ef migrations add MIGRATION_NOTE
    - Lưu thay đổi migrations và CSDL: dotnet ef database update
 9. Sinh mã CRUD dựa trên class model: dotnet aspnet-codegenerator controller -name CourseController -m Course -dc DemoMVC.Data.ApplicationDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries --databaseProvider sqlite
+10. Bài toán quản lý học viên, nghiệp vụ bài toán như sau:
+   - Bước 1: Tạo khoá học, một khoá học có thể có nhiều đợt học, một đợt học có nhiều buổi học
+   - Bước 2: Nhập danh sách học viên tham gia khoá học
+   - Bước 3: Điểm danh học viên theo các buổi học
+   - Bước 4: Nhập kết quả khoá học
+   - CSDL bao gồm các bảng: Course, Batch, Session, Trainee, Attendance, Registration và Evaluation
+11. 

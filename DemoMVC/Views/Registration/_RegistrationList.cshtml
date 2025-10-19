@@ -32,16 +32,16 @@
                     <td>
                         @if (item.Status == RegistrationStatus.Registered)
                         {
-                            <form asp-controller="Course" asp-action="CancelRegistration" asp-route-id="@item.Id" method="post"
-                                class="d-inline">
+                            <form asp-controller="Registration" asp-action="CancelRegistration" asp-route-id="@item.Id"
+                                method="post" class="d-inline">
                                 <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
                                 <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
                             </form>
                         }
                         else
                         {
-                            <form asp-controller="Course" asp-action="UpdateRegistration" asp-route-id="@item.Id" method="post"
-                                class="d-inline">
+                            <form asp-controller="Registration" asp-action="UpdateRegistration" asp-route-id="@item.Id"
+                                method="post" class="d-inline">
                                 <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
                                 <button type="submit" class="btn btn-sm btn-success">Register</button>
                             </form>

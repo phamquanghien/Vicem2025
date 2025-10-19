@@ -120,5 +120,50 @@ namespace DemoMVC.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), "Registration", new { courseId = id });
         }
+        [HttpPost]
+        [Route("huy-dang-ky/{id}")]
+        public async Task<IActionResult> CancelRegistration(int id)
+        {
+            // Tìm bản ghi đăng ký của học viên
+            var registration = await _context.Registrations
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (registration == null)
+            {
+                return NotFound();
+            }
+            if (registration.Status != RegistrationStatus.Registered)
+            {
+                return BadRequest("Không thể huỷ đăng ký học viên.");
+            }
+            // Cập nhật trạng thái
+            registration.Status = RegistrationStatus.Cancelled;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Registration", new { courseId = registration.CourseId });
+        }
+        [HttpPost]
+        [Route("dang-ky/{id}")]
+        public async Task<IActionResult> UpdateRegistration(int id)
+        {
+            // Tìm bản ghi đăng ký của học viên
+            var registration = await _context.Registrations
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (registration == null)
+            {
+                return NotFound();
+            }
+            if (registration.Status != RegistrationStatus.Cancelled)
+            {
+                return BadRequest("Không thể đăng ký học viên");
+            }
+
+            // Cập nhật trạng thái
+            registration.Status = RegistrationStatus.Registered;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Registration", new { courseId = registration.CourseId });
+        }
     }
 }

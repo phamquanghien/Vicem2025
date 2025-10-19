@@ -149,7 +149,7 @@ namespace DemoMVC.Controllers
         [Route("chi-tiet/{id?}")]
         public async Task<IActionResult> Details(int id)
         {
-            ViewData["CourseId"] = id;
+            ViewData["CurrentId"] = id;
             return View();
         }
 

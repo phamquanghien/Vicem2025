@@ -25,15 +25,15 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Batch" asp-action="Index"
-                                asp-route-courseId="@ViewData["CourseId"]">Batch</a>
+                                asp-route-courseId="@ViewData["CurrentId"]">Batch</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Index"
-                                asp-route-courseId="@ViewData["CourseId"]">Registration</a>
+                                asp-route-courseId="@ViewData["CurrentId"]">Registration</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Evaluation" asp-action="Index"
-                                asp-route-courseId="@ViewData["CourseId"]">Evaluation</a>
+                                asp-route-courseId="@ViewData["CurrentId"]">Evaluation</a>
                         </li>
                     </ul>
                 </div>

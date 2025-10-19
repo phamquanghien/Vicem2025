@@ -59,6 +59,10 @@ namespace DemoMVC.Controllers
         [Route("tao-moi/{id}")]
         public async Task<IActionResult> Create([Bind("BatchCode,BatchName,StartDate,EndDate,CourseId")] CreateBatchDto createBatchDto, int id)
         {
+            if (id != createBatchDto.CourseId)
+            {
+                return NotFound();
+            }
             if (ModelState.IsValid)
             {
                 var batch = new Batch

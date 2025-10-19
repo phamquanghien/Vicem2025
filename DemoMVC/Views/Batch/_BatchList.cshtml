@@ -47,7 +47,8 @@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                    <a asp-controller="Session" asp-action="Index" asp-route-batchId="@item.Id">Session</a>
                 </td>
             </tr>
         }

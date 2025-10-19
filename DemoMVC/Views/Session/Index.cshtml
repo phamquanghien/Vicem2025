@@ -1,0 +1,9 @@
+@model IEnumerable<DemoMVC.Models.Entities.Session>
+
+@{
+    ViewData["Title"] = "Thời khóa biểu của đợt học: " + ViewBag.CurrentBatchName;
+}
+
+@await Html.PartialAsync("_PageHeader")
+
+@await Html.PartialAsync("_SessionList", Model)

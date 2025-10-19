@@ -4,6 +4,7 @@ using DemoMVC.Data;
 using DemoMVC.Models.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DemoMVC.Models.Enums;
+using DemoMVC.Models.DTOs.Course;
 
 namespace DemoMVC.Controllers
 {
@@ -33,7 +34,6 @@ namespace DemoMVC.Controllers
         [Route("tao-moi")]
         public IActionResult Create()
         {
-            ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(CourseStatus)));
             return View();
         }
 
@@ -41,16 +41,22 @@ namespace DemoMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("tao-moi")]
-        public async Task<IActionResult> Create([Bind("Id,CourseCode,CourseName,CreatedDate,Status")] Course course)
+        public async Task<IActionResult> Create([Bind("CourseCode,CourseName")] CreateCourseDto createCourseDto)
         {
             if (ModelState.IsValid)
             {
+                var course = new Course
+                {
+                    CourseCode = createCourseDto.CourseCode,
+                    CourseName = createCourseDto.CourseName,
+                    CreatedDate = DateTime.Now,
+                    Status = CourseStatus.NotStarted
+                };
                 _context.Add(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(CourseStatus)));
-            return View(course);
+            return View(createCourseDto);
         }
 
         // GET: Course/Edit/5

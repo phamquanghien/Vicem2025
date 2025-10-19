@@ -1,0 +1,9 @@
+@model IEnumerable<DemoMVC.Models.Entities.Batch>
+
+@{
+    ViewData["Title"] = "Danh sách đợt học của khóa học: " + ViewBag.CurrentCourseName;
+}
+
+@await Html.PartialAsync("_PageHeader")
+
+@await Html.PartialAsync("_BatchList", Model)

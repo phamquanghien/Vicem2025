@@ -10,7 +10,7 @@
             </button>
         </div>
     </form>
-    <a asp-action="Create" class="btn btn-success ms-auto">
+    <a asp-action="Create" class="btn btn-success ms-auto" asp-route-id="@ViewData["CurrentId"]">
         <i class="fa fa-plus-circle"></i> Tạo mới
     </a>
 </div>

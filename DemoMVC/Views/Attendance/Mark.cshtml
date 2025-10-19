@@ -1,0 +1,52 @@
+@model DemoMVC.Models.ViewModels.AttendanceVM
+@using DemoMVC.Models.Entities
+@using DemoMVC.Models.Enums
+@{
+    Layout = "_CourseLayout";
+}
+
+<h3>Điểm danh khóa học: @Model.CourseName</h3>
+<p><b>Đợt học:</b> @Model.BatchName</p>
+<p><b>Ngày học:</b> @Model.SessionDate.ToString("dd/MM/yyyy")</p>
+<p><b>Buổi:</b> @Model.SessionType</p>
+
+<form asp-action="Mark" method="post">
+    <input type="hidden" asp-for="SessionId" />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mã học viên</th>
+                <th>Họ và tên</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Trainees.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model.Trainees[i].TraineeCode
+                        <input type="hidden" asp-for="Trainees[i].TraineeId" />
+                    </td>
+                    <td>@Model.Trainees[i].FullName</td>
+                    <td>
+                        <select asp-for="Trainees[i].Status" class="form-select">
+                            @foreach (AttendanceStatus status in Enum.GetValues(typeof(AttendanceStatus)))
+                            {
+                                <option value="@status">@status</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Lưu điểm danh</button>
+</form>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["Success"]</div>
+}

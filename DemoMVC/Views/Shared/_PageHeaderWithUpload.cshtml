@@ -1,0 +1,18 @@
+<h3 class="mb-0 me-3">@ViewBag.Title</h3>
+<hr />
+<div class="d-flex align-items-center mb-4 flex-wrap gap-2">
+    <form asp-action="Index" method="get" class="d-flex align-items-center">
+        <div class="input-group">
+            <input type="text" id="searchString" name="searchString" value="@ViewData["CurrentFilter"]"
+                class="form-control" placeholder="Enter keyword here..." />
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <a asp-action="ImportTrainees" asp-route-id="@ViewBag.CurrentId" class="btn btn-primary ms-auto">Nhập từ file
+        Excel</a>
+    <a asp-action="Create" class="btn btn-success" asp-route-id="@ViewData["CurrentId"]">
+        <i class="fa fa-plus-circle"></i> Tạo mới
+    </a>
+</div>

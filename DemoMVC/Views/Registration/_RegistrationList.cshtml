@@ -1,0 +1,61 @@
+@using DemoMVC.Models.Enums
+@model IEnumerable<DemoMVC.Models.ViewModels.RegistrationVM>
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>#</th>
+            <th>@Html.DisplayNameFor(model => model.TraineeCode)</th>
+            <th>@Html.DisplayNameFor(model => model.FullName)</th>
+            <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+            <th>@Html.DisplayNameFor(model => model.Gender)</th>
+            <th>@Html.DisplayNameFor(model => model.Organization)</th>
+            <th>@Html.DisplayNameFor(model => model.RegistrationDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int index = 1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@item.TraineeCode</td>
+                    <td>@item.FullName</td>
+                    <td>@item.DateOfBirth?.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Organization</td>
+                    <td>@item.RegistrationDate.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Status</td>
+                    <td>
+                        @if (item.Status == RegistrationStatus.Registered)
+                        {
+                            <form asp-controller="Course" asp-action="CancelRegistration" asp-route-id="@item.Id" method="post"
+                                class="d-inline">
+                                <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
+                                <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-controller="Course" asp-action="UpdateRegistration" asp-route-id="@item.Id" method="post"
+                                class="d-inline">
+                                <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
+                                <button type="submit" class="btn btn-sm btn-success">Register</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="12" class="text-center text-muted">Không có dữ liệu đăng ký nào.</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -5,10 +5,5 @@
     ViewData["Title"] = "Danh sách học viên của khoá học: " + ViewBag.CurrentCourseName;
 }
 
-@* <div class="mb-3">
-    <a asp-action="Create" class="btn btn-primary">+ Thêm mới đăng ký</a>
-    <a asp-action="ImportTrainees" asp-route-courseId="@ViewBag.CourseId" class="btn btn-success">Nhập từ file Excel</a>
-</div> *@
-
 @await Html.PartialAsync("_PageHeaderWithUpload")
 @await Html.PartialAsync("_RegistrationList", Model)

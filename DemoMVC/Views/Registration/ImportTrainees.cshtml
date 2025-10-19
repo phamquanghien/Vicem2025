@@ -1,0 +1,14 @@
+@{
+    Layout = "_CourseLayout";
+}
+<h3>Nhập danh sách học viên từ file Excle cho khoá học: @ViewBag.CurrentCourseName</h3>
+<hr />
+
+<form asp-action="ImportTrainees" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="courseId" value="@ViewBag.CourseId" />
+    <div class="form-group">
+        <label>Chọn file Excel (.xlsx)</label>
+        <input type="file" name="file" class="form-control" accept=".xlsx,.xls" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Tải lên</button>
+</form>

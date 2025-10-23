@@ -25,9 +25,15 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
+    .WithStaticAssets();
+
+app.MapControllerRoute(
+    name: "Admin_default",
+    pattern: "admin/{controller=Course}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 app.MapGet("/", () => Results.Redirect("/trang-chu"));
